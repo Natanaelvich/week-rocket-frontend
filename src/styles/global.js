@@ -11,16 +11,20 @@ export default createGlobalStyle`
         box-sizing : border-box;
     } 
     body {
+        background : #353940;
+        color : #fff;
+        text-rendering : optimizeLegibility !important;
         -webkit-font-smoothing : antialiased !important;
     }
+
+    html, body, #root{
+        height : 100%;
+    }
+    
     body,input,button{
         font : 14px Roboto, sans-serif;
     }
-    #root{
-        max-width : 1202px;
-        margin : 0 auto;
-        padding : 0 20px 50px; 
-    }
+  
     button{
         cursor: pointer;
     }
