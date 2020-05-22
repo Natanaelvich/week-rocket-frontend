@@ -1,8 +1,6 @@
 <h1 align='center'> WEEK ROCKET </h1>
 
-### PROJECT ROCKETSEAT SEMANA OMNISTACK 9 :rocket:  :fire:
-
-> check out https://aircnc-web-natanaelvich.herokuapp.com/
+### project in react js for manage teams in projects ✡️💜👾⚛
 
 ## Requirements
 
