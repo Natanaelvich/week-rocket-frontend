@@ -1,8 +1,8 @@
 import produce from 'immer';
 
 const initialState = {
-  signedIn: false,
-  token: null,
+  signedIn: !!localStorage.getItem('@week:token'),
+  token: localStorage.getItem('@week:token') || null,
 };
 
 export default (state = initialState, { type, token }) => {
