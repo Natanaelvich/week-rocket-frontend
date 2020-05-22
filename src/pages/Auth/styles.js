@@ -38,7 +38,7 @@ export const SignIN = styled.form`
     padding: 10px;
     border-radius: 3px;
     border-radius: 1px solid rgba(0, 0, 0, 0.3);
-    background-color: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.1);
     color: #f6f6f6;
     margin-top: 8px;
     transition: border 0.15s ease;
