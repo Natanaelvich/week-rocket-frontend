@@ -1,6 +1,8 @@
 import { call, put, all, takeLatest } from 'redux-saga/effects';
+import { toast } from 'react-toastify';
 import { signInSuccess } from './actions';
 import api from '~/services/api';
+import history from '~/services/services';
 
 function* signIn({ payload }) {
   try {
@@ -8,10 +10,13 @@ function* signIn({ payload }) {
       email: payload.email,
       password: payload.password,
     });
+
     localStorage.setItem('@week:token', response.data.token);
     yield put(signInSuccess(response.data.token));
+
+    history.push('/');
   } catch (error) {
-    console.log(error);
+    toast.warn('🤷‍♂️ Erro no login!');
   }
 }
 
