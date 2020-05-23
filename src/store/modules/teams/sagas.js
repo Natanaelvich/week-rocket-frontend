@@ -9,7 +9,6 @@ function* getTeams() {
 
     yield put(getTeamsSuccess(response.data));
   } catch (error) {
-    console.log(error);
     toast.warn('🤷‍♂️ Erro ao buscar times!');
   }
 }
