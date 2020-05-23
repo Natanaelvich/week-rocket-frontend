@@ -4,6 +4,7 @@ import TeamSwitcher from '~/components/TeamSwitcher';
 
 import { Container } from './styles';
 import { getTeamsRequest } from '~/store/modules/teams/actions';
+import Projects from '~/components/Projects';
 
 function Main() {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ function Main() {
   return (
     <Container>
       <TeamSwitcher teams={teams} />
+      <Projects />
     </Container>
   );
 }

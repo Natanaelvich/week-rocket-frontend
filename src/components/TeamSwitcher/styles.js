@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.aside`
   background: #202225;
@@ -27,6 +27,14 @@ export const Team = styled.button`
     &:hover {
       border-radius: 30%;
     }
+    ${props =>
+      props.active
+        ? css`
+            border: 3px solid #fff;
+          `
+        : css`
+            border: 0;
+          `}
   }
 `;
 export const NewTeam = styled.button`

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropsTypes from 'prop-types';
 import { MdAdd, MdPowerSettingsNew } from 'react-icons/md';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Container, Team, TeamList, NewTeam, Logout } from './styles';
 import {
   selectTeam,
@@ -16,6 +16,7 @@ import { signOutRequest } from '~/store/modules/user/actions';
 
 function TeamSwitcher({ teams }) {
   const dispatch = useDispatch();
+  const activeTeam = useSelector(state => state.teams.active);
 
   const [nameTeam, setNameTeam] = useState('');
 
@@ -32,7 +33,11 @@ function TeamSwitcher({ teams }) {
     <Container>
       <TeamList>
         {teams.data.map(team => (
-          <Team key={team.id} onClick={() => handleSelectTeam(team)}>
+          <Team
+            active={team.id === activeTeam.id}
+            key={team.id}
+            onClick={() => handleSelectTeam(team)}
+          >
             <img
               alt={team.name}
               src={`https://ui-avatars.com/api/?font-size=0.33&background=7159C1&color=fff&name=${team.name}`}
