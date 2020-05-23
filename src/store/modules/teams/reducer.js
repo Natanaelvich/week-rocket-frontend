@@ -10,7 +10,7 @@ export default (state = initialState, { type, teams, team }) => {
   switch (type) {
     case '@teams/GET_TEAMS_SUCCESS':
       return produce(state, draft => {
-        draft.data.push(...teams);
+        draft.data = [...teams];
       });
 
     case '@teams/CREATE_TEAM_SUCCESS':
