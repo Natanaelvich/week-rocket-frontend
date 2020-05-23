@@ -1,9 +1,16 @@
 import React from 'react';
 import PropsTypes from 'prop-types';
+import { MdAdd } from 'react-icons/md';
 
 import { useDispatch } from 'react-redux';
-import { Container, Team, TeamList } from './styles';
-import { selectTeam } from '~/store/modules/teams/actions';
+import { Container, Team, TeamList, NewTeam } from './styles';
+import {
+  selectTeam,
+  openTeamModal,
+  closeTeamModal,
+} from '~/store/modules/teams/actions';
+import Modal from '../Modal';
+import { Button } from '~/styles/components/Button';
 
 function TeamSwitcher({ teams }) {
   const dispatch = useDispatch();
@@ -22,7 +29,33 @@ function TeamSwitcher({ teams }) {
             />
           </Team>
         ))}
+        <NewTeam onClick={() => dispatch(openTeamModal())}>
+          <MdAdd size={28} color="#fff" />
+        </NewTeam>
       </TeamList>
+
+      {teams.teamModalOpen && (
+        <Modal>
+          <h1>Criar Time</h1>
+
+          <form>
+            <span>Nome</span>
+            <input type="text" name="newTeam" />
+
+            <Button size="big" type="submit">
+              Salvar
+            </Button>
+
+            <Button
+              onClick={() => dispatch(closeTeamModal())}
+              size="small"
+              color="gray"
+            >
+              Cancelar
+            </Button>
+          </form>
+        </Modal>
+      )}
     </Container>
   );
 }
@@ -30,6 +63,7 @@ function TeamSwitcher({ teams }) {
 TeamSwitcher.propTypes = {
   teams: PropsTypes.shape({
     map: PropsTypes.func,
+    teamModalOpen: PropsTypes.bool,
     data: PropsTypes.arrayOf(
       PropsTypes.shape({
         id: PropsTypes.number,

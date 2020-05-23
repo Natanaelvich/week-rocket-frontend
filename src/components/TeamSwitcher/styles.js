@@ -29,3 +29,18 @@ export const Team = styled.button`
     }
   }
 `;
+export const NewTeam = styled.button`
+  border: 1px dashed rgba(255, 255, 255, 0.3);
+  background: transparent;
+  margin: 0 0 8px;
+
+  transition: all 0.2s;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+
+  &:hover {
+    border-radius: 30%;
+    background: #7159c1;
+  }
+`;

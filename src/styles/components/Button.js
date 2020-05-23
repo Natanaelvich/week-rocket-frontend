@@ -15,7 +15,7 @@ const sizes = {
   `,
 };
 
-const colors = {
+const color = {
   defautl: css`
     background: #7289da;
 
@@ -52,7 +52,7 @@ export const Button = styled.button.attrs({})`
   font-weight: 700;
 
   ${props => sizes[props.size || 'default']};
-  ${props => colors[props.colors || 'default']};
+  ${props => color[props.color || 'default']};
 
   ${props =>
     props.filled === false &&
