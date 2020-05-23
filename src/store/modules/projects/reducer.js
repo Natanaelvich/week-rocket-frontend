@@ -1,25 +1,14 @@
 import produce from 'immer';
-import history from '~/services/services';
 
 const initialState = {
-  signedIn: !!localStorage.getItem('@week:token'),
-  token: localStorage.getItem('@week:token') || null,
+  data: [],
 };
 
-export default (state = initialState, { type, token }) => {
+export default (state = initialState, { type, projects }) => {
   switch (type) {
-    case '@user/SIGN_IN_SUCCESS':
+    case '@projects/GET_PROJECTS_SUCCESS':
       return produce(state, draft => {
-        draft.signedIn = true;
-        draft.token = token;
-      });
-
-    case '@user/SIGN_OUT_REQUEST':
-      localStorage.clear();
-      history.push('signin');
-      return produce(state, draft => {
-        draft.signedIn = false;
-        draft.token = null;
+        draft.data = projects;
       });
 
     default:

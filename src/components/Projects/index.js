@@ -1,11 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getProjectsRequest } from '~/store/modules/projects/actions';
 
-import { useSelector } from 'react-redux';
 import { Container, Project } from './styles';
 import { Button } from '~/styles/components/Button';
 
 function Projects() {
+  const dispatch = useDispatch();
+
   const activeTeam = useSelector(state => state.teams.active);
+  const projects = useSelector(state => state.projects.data);
+
+  function getProjects() {
+    dispatch(getProjectsRequest());
+  }
+
+  useEffect(() => {
+    if (activeTeam) {
+      getProjects();
+    }
+  });
+
   return (
     <>
       {activeTeam && (
@@ -19,9 +34,12 @@ function Projects() {
             </div>
           </header>
 
-          <Project>
-            <p>Aplicação com react native</p>
-          </Project>
+          {projects &&
+            projects.map(project => (
+              <Project key={project.id}>
+                <p>{project.title}</p>
+              </Project>
+            ))}
         </Container>
       )}
     </>
