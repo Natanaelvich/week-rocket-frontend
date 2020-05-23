@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropsTypes from 'prop-types';
 import { MdAdd } from 'react-icons/md';
 
@@ -8,6 +8,7 @@ import {
   selectTeam,
   openTeamModal,
   closeTeamModal,
+  createTeamRequest,
 } from '~/store/modules/teams/actions';
 import Modal from '../Modal';
 import { Button } from '~/styles/components/Button';
@@ -15,8 +16,16 @@ import { Button } from '~/styles/components/Button';
 function TeamSwitcher({ teams }) {
   const dispatch = useDispatch();
 
+  const [nameTeam, setNameTeam] = useState('');
+
   function handleSelectTeam(team) {
     dispatch(selectTeam(team));
+  }
+
+  function handleCreateTeam(e) {
+    e.preventDefault();
+
+    dispatch(createTeamRequest(nameTeam));
   }
   return (
     <Container>
@@ -38,9 +47,14 @@ function TeamSwitcher({ teams }) {
         <Modal>
           <h1>Criar Time</h1>
 
-          <form>
+          <form onSubmit={handleCreateTeam}>
             <span>Nome</span>
-            <input type="text" name="newTeam" />
+            <input
+              value={nameTeam}
+              onChange={text => setNameTeam(text.target.value)}
+              type="text"
+              name="newTeam"
+            />
 
             <Button size="big" type="submit">
               Salvar

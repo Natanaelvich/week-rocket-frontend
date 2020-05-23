@@ -13,6 +13,11 @@ export default (state = initialState, { type, teams, team }) => {
         draft.data.push(...teams);
       });
 
+    case '@teams/CREATE_TEAM_SUCCESS':
+      return produce(state, draft => {
+        draft.data.push(team);
+      });
+
     case '@teams/SELECT_TEAM':
       localStorage.setItem('@week:team', JSON.stringify(team));
       return produce(state, draft => {

@@ -7,6 +7,16 @@ export const getTeamsSuccess = teams => ({
   teams,
 });
 
+export const createTeamRequest = nameTeam => ({
+  type: '@teams/CREATE_TEAM_REQUEST',
+  nameTeam,
+});
+
+export const createTeamSuccess = team => ({
+  type: '@teams/CREATE_TEAM_SUCCESS',
+  team,
+});
+
 export const selectTeam = team => ({
   type: '@teams/SELECT_TEAM',
   team,
