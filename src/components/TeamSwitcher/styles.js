@@ -44,3 +44,18 @@ export const NewTeam = styled.button`
     background: #7159c1;
   }
 `;
+
+export const Logout = styled.button`
+  background: transparent;
+  margin: 0 0 8px;
+
+  transition: all 0.2s;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+
+  &:hover {
+    background: #e04848;
+  }
+`;

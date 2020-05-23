@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import PropsTypes from 'prop-types';
-import { MdAdd } from 'react-icons/md';
+import { MdAdd, MdPowerSettingsNew } from 'react-icons/md';
 
 import { useDispatch } from 'react-redux';
-import { Container, Team, TeamList, NewTeam } from './styles';
+import { Container, Team, TeamList, NewTeam, Logout } from './styles';
 import {
   selectTeam,
   openTeamModal,
@@ -12,6 +12,7 @@ import {
 } from '~/store/modules/teams/actions';
 import Modal from '../Modal';
 import { Button } from '~/styles/components/Button';
+import { signOutRequest } from '~/store/modules/user/actions';
 
 function TeamSwitcher({ teams }) {
   const dispatch = useDispatch();
@@ -42,6 +43,10 @@ function TeamSwitcher({ teams }) {
           <MdAdd size={28} color="#fff" />
         </NewTeam>
       </TeamList>
+
+      <Logout onClick={() => dispatch(signOutRequest())}>
+        <MdPowerSettingsNew size={28} color="#fff" />
+      </Logout>
 
       {teams.teamModalOpen && (
         <Modal>
