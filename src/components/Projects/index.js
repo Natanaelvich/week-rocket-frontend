@@ -1,25 +1,47 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getProjectsRequest } from '~/store/modules/projects/actions';
+import {
+  getProjectsRequest,
+  openProjectModal,
+  closeProjectModal,
+  createProjectsRequest,
+} from '~/store/modules/projects/actions';
 
 import { Container, Project } from './styles';
 import { Button } from '~/styles/components/Button';
+import Modal from '../Modal';
 
 function Projects() {
   const dispatch = useDispatch();
 
   const activeTeam = useSelector(state => state.teams.active);
-  const projects = useSelector(state => state.projects.data);
+  const projects = useSelector(state => state.projects);
 
-  function getProjects() {
-    dispatch(getProjectsRequest());
-  }
+  const [titleProject, settitleProject] = useState('');
 
   useEffect(() => {
+    function getProjects() {
+      dispatch(getProjectsRequest());
+    }
     if (activeTeam) {
       getProjects();
     }
-  });
+  }, [activeTeam, dispatch]);
+
+  function handleOpenModalProject() {
+    dispatch(openProjectModal());
+  }
+
+  function handleCloseModalProject() {
+    dispatch(closeProjectModal());
+  }
+
+  function handleCreateProject(e) {
+    e.preventDefault();
+
+    dispatch(createProjectsRequest(titleProject));
+    handleCloseModalProject();
+  }
 
   return (
     <>
@@ -29,17 +51,47 @@ function Projects() {
             <h1>{activeTeam.name}</h1>
 
             <div>
-              <Button>+ Novo</Button>
+              <Button onClick={handleOpenModalProject}>+ Novo</Button>
               <Button>Membros</Button>
             </div>
           </header>
 
-          {projects &&
-            projects.map(project => (
+          {projects.data &&
+            projects.data.map(project => (
               <Project key={project.id}>
                 <p>{project.title}</p>
               </Project>
             ))}
+
+          {projects.projectModalOpen && (
+            <Modal>
+              <h1>Criar projeto</h1>
+
+              <form onSubmit={handleCreateProject}>
+                <span>Nome</span>
+                <input
+                  value={titleProject}
+                  onChange={text =>
+                    settitleProject(text.target.value)
+                  }
+                  type="text"
+                  name="newProject"
+                />
+
+                <Button size="big" type="submit">
+                  Salvar
+                </Button>
+
+                <Button
+                  onClick={handleCloseModalProject}
+                  size="small"
+                  color="gray"
+                >
+                  Cancelar
+                </Button>
+              </form>
+            </Modal>
+          )}
         </Container>
       )}
     </>
