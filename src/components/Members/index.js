@@ -83,7 +83,7 @@ function Members() {
                     getOptionValue={role => role.id}
                     value={member.roles}
                     onChange={value =>
-                      handleRolesChange(member.user.id, value)
+                      handleRolesChange(member.id, value)
                     }
                   />
                 </Can>

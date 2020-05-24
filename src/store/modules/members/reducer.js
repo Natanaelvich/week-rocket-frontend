@@ -23,7 +23,7 @@ export default (
     case '@members/UPDATE_MEMBERS_REQUEST':
       return produce(state, draft => {
         draft.data = draft.data.map(memberUpdate =>
-          memberUpdate.user.id === update.id
+          memberUpdate.id === update.id
             ? { ...memberUpdate, roles: update.roles }
             : memberUpdate
         );

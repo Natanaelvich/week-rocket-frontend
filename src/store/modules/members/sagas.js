@@ -27,6 +27,7 @@ function* createMember({ emailInvite }) {
 }
 
 function* updateMember({ update }) {
+  console.log(update);
   try {
     yield call(api.put, `members/${update.id}`, {
       roles: update.roles.map(role => role.id),
