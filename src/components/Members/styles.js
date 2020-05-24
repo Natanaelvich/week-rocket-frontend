@@ -8,7 +8,7 @@ export const MembersList = styled.ul`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0;
+    margin: 10px 0 0;
 
     &:first-child {
       margin: 0;
@@ -23,4 +23,8 @@ export const MembersList = styled.ul`
       color: #666;
     }
   }
+`;
+export const Invite = styled.form`
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 `;

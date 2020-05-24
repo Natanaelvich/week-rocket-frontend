@@ -14,6 +14,12 @@ export default (state = initialState, { type, token }) => {
         draft.token = token;
       });
 
+    case '@user/SIGN_UP_SUCCESS':
+      return produce(state, draft => {
+        draft.signedIn = true;
+        draft.token = token;
+      });
+
     case '@user/SIGN_OUT_REQUEST':
       localStorage.clear();
       history.push('signin');

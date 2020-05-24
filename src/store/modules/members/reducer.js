@@ -5,7 +5,10 @@ const initialState = {
   membersModalOpen: false,
 };
 
-export default (state = initialState, { type, members, member }) => {
+export default (
+  state = initialState,
+  { type, members, member, update }
+) => {
   switch (type) {
     case '@members/GET_MEMBERS_SUCCESS':
       return produce(state, draft => {
@@ -15,6 +18,15 @@ export default (state = initialState, { type, members, member }) => {
     case '@members/CREATE_MEMBER_REQUEST':
       return produce(state, draft => {
         draft.data.push(member);
+      });
+
+    case '@members/UPDATE_MEMBERS_REQUEST':
+      return produce(state, draft => {
+        draft.data = draft.data.map(memberUpdate =>
+          memberUpdate.user.id === update.id
+            ? { ...memberUpdate, roles: update.roles }
+            : memberUpdate
+        );
       });
 
     case '@teams/OPEN_MEMBERS_MODAL':

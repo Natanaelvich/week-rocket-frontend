@@ -8,6 +8,16 @@ export const signInSuccess = token => ({
   token,
 });
 
+export const signUpRequest = (name, email, password) => ({
+  type: '@user/SIGN_UP_REQUEST',
+  payload: { name, email, password },
+});
+
+export const signUpSuccess = token => ({
+  type: '@user/SIGN_UP_SUCCESS',
+  token,
+});
+
 export const signOutRequest = () => ({
   type: '@user/SIGN_OUT_REQUEST',
 });

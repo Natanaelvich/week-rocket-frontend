@@ -34,7 +34,7 @@ function TeamSwitcher({ teams }) {
       <TeamList>
         {teams.data.map(team => (
           <Team
-            active={team.id === activeTeam.id}
+            active={activeTeam && team.id === activeTeam.id}
             key={team.id}
             onClick={() => handleSelectTeam(team)}
           >

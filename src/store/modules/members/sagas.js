@@ -26,7 +26,20 @@ function* createMember({ emailInvite }) {
   }
 }
 
+function* updateMember({ update }) {
+  try {
+    yield call(api.put, `members/${update.id}`, {
+      roles: update.roles.map(role => role.id),
+    });
+
+    toast.success('🚀 Membro atualizadp!');
+  } catch (error) {
+    toast.error('🤷‍♂️ Erro ao mudar permissão!');
+  }
+}
+
 export default all([
   takeLatest('@members/GET_MEMBERS_REQUEST', getMembers),
   takeLatest('@members/CREATE_MEMBER_REQUEST', createMember),
+  takeLatest('@members/UPDATE_MEMBERS_REQUEST', updateMember),
 ]);

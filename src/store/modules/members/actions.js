@@ -7,6 +7,16 @@ export const getMembersSuccess = members => ({
   members,
 });
 
+export const updateMembersRequest = (id, roles) => ({
+  type: '@members/UPDATE_MEMBERS_REQUEST',
+  update: { id, roles },
+});
+
+export const updateMembersSuccess = members => ({
+  type: '@members/UPDATE_MEMBERS_SUCCESS',
+  members,
+});
+
 export const createMemberRequest = data => ({
   type: '@members/CREATE_MEMBER_REQUEST',
   data,
