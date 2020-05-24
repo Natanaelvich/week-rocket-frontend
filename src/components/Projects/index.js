@@ -10,12 +10,15 @@ import {
 import { Container, Project } from './styles';
 import { Button } from '~/styles/components/Button';
 import Modal from '../Modal';
+import { openMembersModal } from '~/store/modules/members/actions';
+import Members from '../Members';
 
 function Projects() {
   const dispatch = useDispatch();
 
   const activeTeam = useSelector(state => state.teams.active);
   const projects = useSelector(state => state.projects);
+  const members = useSelector(state => state.members);
 
   const [titleProject, settitleProject] = useState('');
 
@@ -52,7 +55,9 @@ function Projects() {
 
             <div>
               <Button onClick={handleOpenModalProject}>+ Novo</Button>
-              <Button>Membros</Button>
+              <Button onClick={() => dispatch(openMembersModal())}>
+                Membros
+              </Button>
             </div>
           </header>
 
@@ -92,6 +97,8 @@ function Projects() {
               </form>
             </Modal>
           )}
+
+          {members.membersModalOpen && <Members />}
         </Container>
       )}
     </>
