@@ -5,6 +5,7 @@ import TeamSwitcher from '~/components/TeamSwitcher';
 import { Container } from './styles';
 import { getTeamsRequest } from '~/store/modules/teams/actions';
 import Projects from '~/components/Projects';
+import { getPermissionsRequest } from '~/store/modules/user/actions';
 
 function Main() {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ function Main() {
   useEffect(() => {
     function getTeams() {
       dispatch(getTeamsRequest());
+      dispatch(getPermissionsRequest());
     }
 
     getTeams();

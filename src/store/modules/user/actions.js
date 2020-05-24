@@ -18,6 +18,15 @@ export const signUpSuccess = token => ({
   token,
 });
 
+export const getPermissionsRequest = () => ({
+  type: '@user/GET_PERMISSIONS_REQUEST',
+});
+
+export const getPermissionsSuccess = (roles, permissions) => ({
+  type: '@user/GET_PERMISSIONS_SUCCESS',
+  rolesPermissions: { roles, permissions },
+});
+
 export const signOutRequest = () => ({
   type: '@user/SIGN_OUT_REQUEST',
 });
