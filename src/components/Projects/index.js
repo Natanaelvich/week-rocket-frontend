@@ -12,6 +12,7 @@ import { Button } from '~/styles/components/Button';
 import Modal from '../Modal';
 import { openMembersModal } from '~/store/modules/members/actions';
 import Members from '../Members';
+import Can from '../Can';
 
 function Projects() {
   const dispatch = useDispatch();
@@ -54,7 +55,11 @@ function Projects() {
             <h1>{activeTeam.name}</h1>
 
             <div>
-              <Button onClick={handleOpenModalProject}>+ Novo</Button>
+              <Can checkPermission="projects_create">
+                <Button onClick={handleOpenModalProject}>
+                  + Novo
+                </Button>
+              </Can>
               <Button onClick={() => dispatch(openMembersModal())}>
                 Membros
               </Button>

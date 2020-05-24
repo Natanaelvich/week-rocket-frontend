@@ -21,6 +21,10 @@ function* signIn({ payload }) {
       password: payload.password,
     });
 
+    if (response.statusCode === 401) {
+      toast.warn('🤷‍♂️ Usuario ou senhas incorretos!');
+    }
+
     localStorage.setItem('@week:token', response.data.token);
     yield put(signInSuccess(response.data.token));
 

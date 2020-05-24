@@ -13,6 +13,7 @@ import {
 } from '~/store/modules/members/actions';
 import api from '~/services/api';
 import { inviteMembersRequest } from '~/store/modules/invites/actions';
+import Can from '../Can';
 
 function Members() {
   const dispatch = useDispatch();
@@ -54,16 +55,18 @@ function Members() {
     <Modal size="big">
       <h1>Membros</h1>
 
-      <Invite onSubmit={handleInvite}>
-        <input
-          type="text"
-          placeholder="Convidar para o time"
-          value={invite}
-          onChange={text => setInvite(text.target.value)}
-        />
+      <Can checkPermission="invites_create">
+        <Invite onSubmit={handleInvite}>
+          <input
+            type="text"
+            placeholder="Convidar para o time"
+            value={invite}
+            onChange={text => setInvite(text.target.value)}
+          />
 
-        <Button type="submit">Enviar</Button>
-      </Invite>
+          <Button type="submit">Enviar</Button>
+        </Invite>
+      </Can>
 
       <form>
         <MembersList>
@@ -72,16 +75,18 @@ function Members() {
               <li key={member.user.id}>
                 <strong>{member.user.name}</strong>
 
-                <Select
-                  isMulti
-                  options={roles}
-                  getOptionLabel={role => role.name}
-                  getOptionValue={role => role.id}
-                  value={member.roles}
-                  onChange={value =>
-                    handleRolesChange(member.user.id, value)
-                  }
-                />
+                <Can checkRole="admnistrador">
+                  <Select
+                    isMulti
+                    options={roles}
+                    getOptionLabel={role => role.name}
+                    getOptionValue={role => role.id}
+                    value={member.roles}
+                    onChange={value =>
+                      handleRolesChange(member.user.id, value)
+                    }
+                  />
+                </Can>
               </li>
             ))}
         </MembersList>
