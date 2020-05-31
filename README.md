@@ -4,11 +4,6 @@
 
 ---
 
-## GIFs
-
-![rocket](https://user-images.githubusercontent.com/52014318/82701266-38095180-9c46-11ea-9ead-094a3543706c.gif)
-
-
 ## Requirements
 
 For development, you will only need Node.js installed on your environement.
