@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import socketio from '@adonisjs/websocket-client';
+
 import {
   getProjectsRequest,
   openProjectModal,
@@ -22,6 +24,26 @@ function Projects() {
   const members = useSelector(state => state.members);
 
   const [titleProject, settitleProject] = useState('');
+
+  useEffect(() => {
+    const socket = socketio('ws://localhost:3333').connect();
+
+    socket.on('open', () => {
+      console.log('connected');
+    });
+
+    const chat = socket.subscribe('chat');
+
+    chat.on('ready', () => {
+      chat.emit('message', 'hello');
+    });
+
+    chat.on('error', error => {
+      console.log(error);
+    });
+
+    chat.on('close', () => {});
+  }, []);
 
   useEffect(() => {
     function getProjects() {
