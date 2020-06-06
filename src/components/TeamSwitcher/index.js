@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import PropsTypes from 'prop-types';
 import { MdAdd, MdPowerSettingsNew } from 'react-icons/md';
-import socketio from '@adonisjs/websocket-client';
-
 import { useDispatch, useSelector } from 'react-redux';
+import socketio from '~/lib/webSocket';
+
 import { Container, Team, TeamList, NewTeam, Logout } from './styles';
 import {
   selectTeam,
@@ -15,7 +15,7 @@ import Modal from '../Modal';
 import { Button } from '~/styles/components/Button';
 import { signOutRequest } from '~/store/modules/user/actions';
 
-const socket = socketio('ws://localhost:3333').connect();
+const socket = socketio.connect();
 const projectsSocket = socket.subscribe('projects');
 
 function TeamSwitcher({ teams }) {
@@ -24,12 +24,13 @@ function TeamSwitcher({ teams }) {
 
   const [nameTeam, setNameTeam] = useState('');
 
-  function handleSelectTeam(team) {
-    projectsSocket.emit('message', activeTeam);
-    projectsSocket.on('message', data => {
-      console.log(data);
+  useEffect(() => {
+    projectsSocket.on('new:project', project => {
+      console.log(project);
     });
+  }, []);
 
+  function handleSelectTeam(team) {
     dispatch(selectTeam(team));
   }
 

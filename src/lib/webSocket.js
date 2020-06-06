@@ -1,9 +1,12 @@
 import Ws from '@adonisjs/websocket-client';
+import store from '~/store';
+
+const { token } = store.getState().user;
 
 export class SocketConnection {
   connect() {
-    this.ws = Ws('http://localhost:3333')
-      // .withApiToken(token)
+    this.ws = Ws('ws://localhost:3333')
+      .withApiToken(token)
       .connect();
 
     this.ws.on('open', () => {
