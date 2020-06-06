@@ -23,7 +23,7 @@ function* createTeam({ nameTeam }) {
       name: nameTeam,
     });
 
-    yield put(createTeamSuccess(response.data));
+    // yield put(createTeamSuccess(response.data));
     yield put(closeTeamModal());
     toast.success('🚀 Novo time criado!');
   } catch (error) {

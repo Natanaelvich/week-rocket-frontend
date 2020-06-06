@@ -15,7 +15,7 @@ function* createProjects({ titleProject }) {
       title: titleProject,
     });
 
-    yield put(createProjectsSuccess(response.data));
+    // yield put(createProjectsSuccess(response.data));
     toast.success('Novo projeto criado');
   } catch (error) {
     toast.warn('Erro ao criar projeto');

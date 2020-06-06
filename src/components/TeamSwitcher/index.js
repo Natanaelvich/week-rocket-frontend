@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import PropsTypes from 'prop-types';
 import { MdAdd, MdPowerSettingsNew } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
-import socketio from '~/lib/webSocket';
 
 import { Container, Team, TeamList, NewTeam, Logout } from './styles';
 import {
@@ -10,13 +9,16 @@ import {
   openTeamModal,
   closeTeamModal,
   createTeamRequest,
+  createTeamSuccess,
 } from '~/store/modules/teams/actions';
 import Modal from '../Modal';
 import { Button } from '~/styles/components/Button';
 import { signOutRequest } from '~/store/modules/user/actions';
 
+import socketio from '~/lib/webSocket';
+
 const socket = socketio.connect();
-const projectsSocket = socket.subscribe('projects');
+const teamSocket = socket.subscribe('teams');
 
 function TeamSwitcher({ teams }) {
   const dispatch = useDispatch();
@@ -25,10 +27,10 @@ function TeamSwitcher({ teams }) {
   const [nameTeam, setNameTeam] = useState('');
 
   useEffect(() => {
-    projectsSocket.on('new:project', project => {
-      console.log(project);
+    teamSocket.on('new:team', team => {
+      dispatch(createTeamSuccess(team));
     });
-  }, []);
+  }, [dispatch]);
 
   function handleSelectTeam(team) {
     dispatch(selectTeam(team));

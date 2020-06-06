@@ -6,6 +6,7 @@ import {
   openProjectModal,
   closeProjectModal,
   createProjectsRequest,
+  createProjectsSuccess,
 } from '~/store/modules/projects/actions';
 
 import { Container, Project } from './styles';
@@ -14,6 +15,10 @@ import Modal from '../Modal';
 import { openMembersModal } from '~/store/modules/members/actions';
 import Members from '../Members';
 import Can from '../Can';
+import socketio from '~/lib/webSocket';
+
+const socket = socketio.connect();
+const projectsSocket = socket.subscribe('projects');
 
 function Projects() {
   const dispatch = useDispatch();
@@ -23,6 +28,12 @@ function Projects() {
   const members = useSelector(state => state.members);
 
   const [titleProject, settitleProject] = useState('');
+
+  useEffect(() => {
+    projectsSocket.on('new:project', project => {
+      dispatch(createProjectsSuccess(project));
+    });
+  }, [dispatch]);
 
   useEffect(() => {
     function getProjects() {
